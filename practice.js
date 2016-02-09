@@ -24,16 +24,36 @@
   //getUsername --> which is a function that returns the current object's username property. *Don't use 'user' instead use the 'this' keyword*
 
     //Code Here
+var user = {
+    username: 'duuude',
+    email: 'duuude@gmail.com',
+    getUsername: function () {
+        return this.username;
+    }
+}
 
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
 
 
 //Next Problem
-
+user.getusername();
 
 // Write the function definitions which will make the following function invocations function properly.
 
   //Function Invocations Here
+
+function Product(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+}
+function Car (make, model, year) {
+    Product.call(this, make, model, year);
+        this.move = 0;
+        this.moveCar = function () {
+            return this.move += 10;
+        }
+}
 
 var prius = new Car('Toyota', 'Prius', 2011);
 var mustang = new Car('Ford', 'Mustang', 2013);
@@ -55,7 +75,8 @@ var getYear = function(){
 
 //Note(no tests)
   //Code Here
-
+getYear.call(prius);
+getYear.call(mustang);
 
 //New Problem
 
@@ -71,7 +92,7 @@ var getMyUsername = function(){
   console.log(this.username);
 };
 
-setTimeout(getMyUsername, 5000);
+setTimeout(getMyUsername.bind(myUser), 5000);
 
 //Above you're given an object, a function, and a setTimeout invocation. After 5 seconds, what will the getUsername function return?
 //Note(no tests)
